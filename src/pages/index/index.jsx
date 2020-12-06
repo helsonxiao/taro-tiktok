@@ -1,56 +1,67 @@
 import React, { Component } from 'react'
 import Taro from '@tarojs/taro'
-import { Swiper, SwiperItem, Video } from '@tarojs/components'
+import { CoverView, Swiper, SwiperItem, Video } from '@tarojs/components'
+import { AtIcon } from 'taro-ui'
+import 'taro-ui/dist/style/index.scss'
+import { fetchVideos } from '../../services'
 import './index.scss'
 
-const videos = [
-  {
-    id: 'video-1',
-    src: 'http://storage.jd.com/cjj-pub-images/bear.mp4',
-  },
-  {
-    id: 'video-2',
-    src: 'http://storage.jd.com/cjj-pub-images/bear.mp4',
-  },
-  {
-    id: 'video-3',
-    src: 'http://storage.jd.com/cjj-pub-images/bear.mp4',
-  },
-]
+/**
+ * 由于 Swpier 在切换时只提供了当前视频的索引
+ * 所以这边维护的是 SwiperItem index 与 video context 的映射关系
+ * */
+const videoContextMap = {};
 
-const videoRefMap = {};
 
 export default class Index extends Component {
-
-  componentDidMount () {
-    videos.forEach((v, index) => {
-      videoRefMap[index] = Taro.createVideoContext(v.id);
-    })
+  state = {
+    videos: [],
   }
 
-  render () {
+  componentDidMount() {
+    fetchVideos()
+      .then(videos => {
+        this.setState({ videos }) // === this.setState({ videos: videos })
+        videos.forEach((video, index) => {
+          // videos 在 Swiper 中是顺序渲染的，所以这边的 index 可以拿来创建映射关系
+          videoContextMap[index] = Taro.createVideoContext(video.id);
+        })
+        console.log(videoContextMap)
+      })
+      .catch(err => {
+        console.log('获取视频失败: ' + err)
+      })
+  }
+
+  render() {
     return (
       <Swiper
         vertical
         circular={false}
         onChange={e => {
-          Object.keys(videoRefMap).forEach(k => {
+          // 正确做法：暂停当前视频，然后播放新的视频。需要准确记录下当前的 video context
+          // 为了降低上手难度，这边在"视频比较少"的情况下，直接停止了所有视频然后再播放
+          Object.keys(videoContextMap).forEach(k => {
             if (e.detail.current === k) return;
-            videoRefMap[k].stop();
+            videoContextMap[k].stop();
           })
-          videoRefMap[e.detail.current].play();
+          videoContextMap[e.detail.current].play();
         }}
       >
-        {videos.map((v, index) => (
+        {this.state.videos.map((v, index) => (
           <SwiperItem key={index}>
-            <Video id={v.id} src={v.src} />
+            <Video
+              id={v.id}
+              src={v.src}
+              // muted
+              // controls={false}
+            />
+            <CoverView className='heart'>
+              <AtIcon value='heart-2' size='30' color='#F00'></AtIcon>
+            </CoverView>
           </SwiperItem>
         ))}
       </Swiper>
     )
   }
 }
-
-            {/* <CoverView>
-              <CoverImage src='http://img20.360buyimg.com/ling/jfs/t1/20876/36/12835/3043/5c9c2929Ed18cfb11/15b1c03ec830ab8e.png' />
-            </CoverView> */}

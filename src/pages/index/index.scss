@@ -20,3 +20,10 @@ video {
   width: 100%;
   height: 100%;
 }
+
+.heart {
+  position: absolute;
+  z-index: 1;
+  top: 32px;
+  right: 32px;
+}
