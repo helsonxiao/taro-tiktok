@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Taro from '@tarojs/taro'
 import { CoverView, Swiper, SwiperItem, Video } from '@tarojs/components'
 import { AtIcon } from 'taro-ui'
-import 'taro-ui/dist/style/index.scss'
 import { fetchVideos } from '../../services'
 import './index.scss'
 
