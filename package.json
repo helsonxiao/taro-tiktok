@@ -2,7 +2,7 @@
   "name": "taro-tiktok",
   "version": "1.0.0",
   "private": false,
-  "description": "taro tiktok",
+  "description": "taro tiktok 教学案例（基于 taro v3.0.9 开发）",
   "templateInfo": {
     "name": "taro-ui",
     "typescript": false,
@@ -38,10 +38,10 @@
     "@babel/runtime": "^7.7.7",
     "@tarojs/cli": "3.0.9",
     "@tarojs/components": "3.0.9",
+    "@tarojs/react": "3.0.9",
     "@tarojs/runtime": "3.0.9",
     "@tarojs/taro": "3.0.9",
     "lodash": "4.17.15",
-    "@tarojs/react": "3.0.9",
     "react": "^16.10.0",
     "react-dom": "^16.10.0",
     "taro-ui": "^3.0.0-alpha.3"
