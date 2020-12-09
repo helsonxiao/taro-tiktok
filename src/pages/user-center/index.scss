@@ -1,6 +1,13 @@
 .user-center {
   height: 100vh;
   background-color: black;
+
+  .at-modal__content {
+    min-height: unset;
+    .at-input:after {
+      display: none;
+    }
+  }
 }
 
 .wallpaper {
@@ -31,5 +38,13 @@
 }
 
 .fav-videos {
+  display: flex;
+  .fav-video-card {
+    background-color: black;
+    border: 1px solid black;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

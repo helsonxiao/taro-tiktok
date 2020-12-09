@@ -24,6 +24,39 @@ video {
 .heart {
   position: absolute;
   z-index: 1;
-  top: 32px;
-  right: 32px;
+  bottom: 0px;
+  right: 0px;
+  // opacity: 0;
+
+  width: 160px;
+  height: 160px;
+  background-image: url(./heart.png);
+  background-repeat: no-repeat;
+  background-size: 2900%; // 爱心图片的像素大小为 2900*100
+
+  &.animation {
+    opacity: 1;
+    animation: move .8s linear;
+    animation-fill-mode: forwards; // 动画结束时固定在最后一帧
+    animation-timing-function: steps(28);
+  }
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  text {
+    color: white;
+    font-size: 21px;
+    position: relative;
+    bottom: 16px;
+  }
+}
+
+@keyframes move {
+  from {
+    background-position: left;
+  }
+  to {
+    background-position: right;
+  }
 }

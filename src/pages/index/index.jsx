@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Taro from '@tarojs/taro'
-import { CoverView, Swiper, SwiperItem, Video } from '@tarojs/components'
-import { AtIcon } from 'taro-ui'
+import { CoverView, Swiper, SwiperItem, Text, Video, View } from '@tarojs/components'
 import { fetchVideos } from '../../services'
 import './index.scss'
 
@@ -52,11 +51,19 @@ export default class Index extends Component {
             <Video
               id={v.id}
               src={v.src}
-              // muted
-              // controls={false}
+              muted
+              controls={false}
             />
-            <CoverView className='heart'>
-              <AtIcon value='heart-2' size='30' color='#F00'></AtIcon>
+            <CoverView
+              className={`heart${v.isFav ? ' animation' : ''}`}
+              onClick={() => {
+                const newVideo = Object.assign({}, v);
+                newVideo.isFav = !v.isFav;
+                this.state.videos.splice(index, 1, newVideo);
+                this.setState({ videos: this.state.videos })
+              }}
+            >
+              <Text>赞</Text>
             </CoverView>
           </SwiperItem>
         ))}
