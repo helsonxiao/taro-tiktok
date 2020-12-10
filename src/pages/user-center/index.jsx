@@ -7,7 +7,7 @@ import './index.scss'
 import { fetchFavVideos } from '../../services';
 
 const videoWidth = Taro.getSystemInfoSync().windowWidth / 3;
-const videoHeight = videoWidth * 16/9;
+const videoHeight = videoWidth * 16 / 9;
 
 
 export default class Index extends Component {
