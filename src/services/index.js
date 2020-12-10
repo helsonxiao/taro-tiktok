@@ -1,5 +1,5 @@
 /**
- * 网上收集的视频
+ * 网上收集的视频，一个适合国内加载，一个适合国外加载
  */
 const VIDEOS = [
   {
@@ -9,14 +9,19 @@ const VIDEOS = [
   },
   {
     id: 'trailer',
-    isFav: true,
+    isFav: false,
     src: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
   },
   {
-    id: 'bipbopall',
+    id: 'bear2',
     isFav: true,
     src: 'http://storage.jd.com/cjj-pub-images/bear.mp4',
-  }
+  },
+  {
+    id: 'trailer2',
+    isFav: true,
+    src: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
+  },
 ]
 
 /**

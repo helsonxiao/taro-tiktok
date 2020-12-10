@@ -2,6 +2,7 @@ export default {
   pages: [
     'pages/index/index',
     'pages/user-center/index',
+    'pages/video-detail/index',
   ],
   window: {
     backgroundTextStyle: 'light',

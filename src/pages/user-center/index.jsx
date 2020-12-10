@@ -37,7 +37,13 @@ export default class Index extends Component {
             </View>
           )}
           {this.state.favVideos.map(v => (
-            <View key={v.id} className='fav-video-card' style={{ width: videoWidth, height: videoHeight }}>
+            <View
+              key={v.id}
+              className='fav-video-card' style={{ width: videoWidth, height: videoHeight }}
+              onClick={() => {
+                Taro.navigateTo({ url: `/pages/video-detail/index?vid=${v.id}` })
+              }}
+            >
               {/* 放少量 Video 仅作示例，实际上应该放每个视频的封面图，否则很占用资源 */}
               <Video
                 src={v.src}
