@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Taro from '@tarojs/taro'
 import { CoverView, Swiper, SwiperItem, Text, Video, View } from '@tarojs/components'
-import { fetchVideos } from '../../services'
+import { fetchVideos, likeVideo, unlikeVideo } from '../../services'
 import './index.scss'
 
 /**
@@ -61,6 +61,11 @@ export default class Index extends Component {
                 newVideo.isFav = !v.isFav;
                 this.state.videos.splice(index, 1, newVideo);
                 this.setState({ videos: this.state.videos })
+                if (newVideo.isFav) {
+                  likeVideo(v.id);
+                } else {
+                  unlikeVideo(v.id);
+                }
               }}
             >
               <Text>赞</Text>

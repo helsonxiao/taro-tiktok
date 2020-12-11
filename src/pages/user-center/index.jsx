@@ -18,6 +18,14 @@ export default class Index extends Component {
   }
 
   componentDidMount () {
+    this.refresh()
+  }
+
+  onTabItemTap() {
+    this.refresh()
+  }
+
+  refresh = () => {
     fetchFavVideos().then(favVideos => this.setState({ favVideos }))
   }
 
