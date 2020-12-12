@@ -47,17 +47,17 @@ const VIDEOS = [
   //   isFav: false,
   //   src: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
   // },
-]
+];
 
 /**
  * 获取视频列表，视频对象中包含了用户的点赞情况
  */
 export function fetchVideos() {
-  const ids = Taro.getStorageSync('fav-video-ids') || []
-  const videos = VIDEOS.map(v => {
+  const ids = Taro.getStorageSync('fav-video-ids') || [];
+  const videos = VIDEOS.map((v) => {
     v.isFav = ids.includes(v.id);
     return v;
-  })
+  });
   return Promise.resolve(videos);
 }
 
@@ -65,10 +65,12 @@ export function fetchVideos() {
  * 获取用户点赞的视频列表
  */
 export function fetchFavVideos() {
-  return Promise.resolve(VIDEOS.filter(v => {
-    const ids = Taro.getStorageSync('fav-video-ids') || []
-    return ids.includes(v.id);
-  }));
+  return Promise.resolve(
+    VIDEOS.filter((v) => {
+      const ids = Taro.getStorageSync('fav-video-ids') || [];
+      return ids.includes(v.id);
+    })
+  );
 }
 
 /**
@@ -76,12 +78,12 @@ export function fetchFavVideos() {
  * @param {Integer} id 视频唯一标识符
  */
 export function likeVideo(id) {
-  const ids = Taro.getStorageSync('fav-video-ids') || []
+  const ids = Taro.getStorageSync('fav-video-ids') || [];
   ids.push(id);
   return Taro.setStorage({
     key: 'fav-video-ids',
     data: ids,
-  })
+  });
 }
 
 /**
@@ -89,16 +91,15 @@ export function likeVideo(id) {
  * @param {Integer} id 视频唯一标识符
  */
 export function unlikeVideo(id) {
-  const ids = Taro.getStorageSync('fav-video-ids') || []
-  const index = ids.findIndex(_id => _id === id);
+  const ids = Taro.getStorageSync('fav-video-ids') || [];
+  const index = ids.findIndex((_id) => _id === id);
   if (index === -1) return;
-  ids.splice(index, 1)
+  ids.splice(index, 1);
   return Taro.setStorage({
     key: 'fav-video-ids',
     data: ids,
-  })
+  });
 }
-
 
 const userToken = 'test'; // 用户登录后可获得临时 token（作为身份凭据），这里简单把 token 当成永久有效
 
@@ -109,8 +110,8 @@ const userToken = 'test'; // 用户登录后可获得临时 token（作为身份
  * }>} userInfo
  */
 export function fetchUserInfo() {
-  const info = Taro.getStorageSync(`user-info@${userToken}`) || {}
-  return Promise.resolve(info)
+  const info = Taro.getStorageSync(`user-info@${userToken}`) || {};
+  return Promise.resolve(info);
 }
 
 /**

@@ -1,14 +1,24 @@
-import { /* Image, */ Button, Text, Video, View } from '@tarojs/components'
-import React, { Component } from 'react'
+import { /* Image, */ Button, Text, Video, View } from '@tarojs/components';
+import React, { Component } from 'react';
 import Taro from '@tarojs/taro';
-import { AtIcon, AtInput, AtModal, AtModalAction, AtModalContent, AtModalHeader,  } from 'taro-ui'
+import {
+  AtIcon,
+  AtInput,
+  AtModal,
+  AtModalAction,
+  AtModalContent,
+  AtModalHeader,
+} from 'taro-ui';
 // import Wallpaper from './sunset-desert-dunes.jpg'
-import './index.scss'
-import { editUserNickname, fetchFavVideos, fetchUserInfo } from '../../services';
+import './index.scss';
+import {
+  editUserNickname,
+  fetchFavVideos,
+  fetchUserInfo,
+} from '../../services';
 
 const videoWidth = Taro.getSystemInfoSync().windowWidth / 3 - 4; // 每行显示 3 个视频，去掉边框宽度
-const videoHeight = videoWidth * 16 / 9;
-
+const videoHeight = (videoWidth * 16) / 9;
 
 export default class Index extends Component {
   state = {
@@ -18,49 +28,53 @@ export default class Index extends Component {
     nicknameModalVisible: false,
     nicknameInput: '',
     favVideos: [],
-  }
+  };
 
-  componentDidMount () {
-    this.refreshVideos()
+  componentDidMount() {
+    this.refreshVideos();
     this.refreshUserInfo();
   }
 
   onTabItemTap() {
-    this.refreshVideos()
+    this.refreshVideos();
     this.refreshUserInfo();
   }
 
   refreshVideos = () => {
-    fetchFavVideos().then(favVideos => this.setState({ favVideos }))
-  }
+    fetchFavVideos().then((favVideos) => this.setState({ favVideos }));
+  };
 
   refreshUserInfo = () => {
-    fetchUserInfo().then(userInfo => {
+    fetchUserInfo().then((userInfo) => {
       this.setState({ userInfo });
-    })
-  }
+    });
+  };
 
-  render () {
+  render() {
     return (
-      <View className='user-center'>
+      <View className="user-center">
         {/* <Image className='wallpaper' src={Wallpaper} /> */}
-        <View className='wallpaper' />
-        <View className='user-info' onClick={() => this.setState({ nicknameModalVisible: true })}>
-          <Text className='nickname'>{this.state.userInfo.nickname || '点击设置昵称'}</Text>
-          <AtIcon value='edit' size='16' color='ghostwhite' />
+        <View className="wallpaper" />
+        <View
+          className="user-info"
+          onClick={() => this.setState({ nicknameModalVisible: true })}
+        >
+          <Text className="nickname">
+            {this.state.userInfo.nickname || '点击设置昵称'}
+          </Text>
+          <AtIcon value="edit" size="16" color="ghostwhite" />
         </View>
-        <View className='fav-videos'>
-          {this.state.favVideos.length === 0 && (
-            <View>
-              TODO: 占位插画
-            </View>
-          )}
-          {this.state.favVideos.map(v => (
+        <View className="fav-videos">
+          {this.state.favVideos.length === 0 && <View>TODO: 占位插画</View>}
+          {this.state.favVideos.map((v) => (
             <View
               key={v.id}
-              className='fav-video-card' style={{ width: videoWidth, height: videoHeight }}
+              className="fav-video-card"
+              style={{ width: videoWidth, height: videoHeight }}
               onClick={() => {
-                Taro.navigateTo({ url: `/pages/video-detail/index?vid=${v.id}` })
+                Taro.navigateTo({
+                  url: `/pages/video-detail/index?vid=${v.id}`,
+                });
               }}
             >
               {/* 放少量 Video 仅作示例，实际上应该放每个视频的封面图，否则很占用资源 */}
@@ -78,8 +92,8 @@ export default class Index extends Component {
           <AtModalHeader>修改昵称</AtModalHeader>
           <AtModalContent>
             <AtInput
-              type='text'
-              placeholder='请输入昵称'
+              type="text"
+              placeholder="请输入昵称"
               value={this.state.nicknameInput}
               onChange={(value) => {
                 this.setState({ nicknameInput: value });
@@ -89,14 +103,21 @@ export default class Index extends Component {
             />
           </AtModalContent>
           <AtModalAction>
-            <Button onClick={() => this.setState({ nicknameModalVisible: false })}>取消</Button>
-            <Button onClick={() => {
-                editUserNickname(this.state.nicknameInput).then(() => {
-                  this.setState({ nicknameModalVisible: false })
-                  this.refreshUserInfo();
-                }).catch((err) => {
-                  console.error('修改失败: ', err)
-                })
+            <Button
+              onClick={() => this.setState({ nicknameModalVisible: false })}
+            >
+              取消
+            </Button>
+            <Button
+              onClick={() => {
+                editUserNickname(this.state.nicknameInput)
+                  .then(() => {
+                    this.setState({ nicknameModalVisible: false });
+                    this.refreshUserInfo();
+                  })
+                  .catch((err) => {
+                    console.error('修改失败: ', err);
+                  });
               }}
             >
               确定
@@ -104,6 +125,6 @@ export default class Index extends Component {
           </AtModalAction>
         </AtModal>
       </View>
-    )
+    );
   }
 }

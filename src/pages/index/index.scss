@@ -36,7 +36,7 @@ video {
 
   &.animation {
     opacity: 1;
-    animation: move .8s linear;
+    animation: move 0.8s linear;
     animation-fill-mode: forwards; // 动画结束时固定在最后一帧
     animation-timing-function: steps(28);
   }
