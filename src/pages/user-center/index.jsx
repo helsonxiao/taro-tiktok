@@ -4,29 +4,40 @@ import Taro from '@tarojs/taro';
 import { AtIcon, AtInput, AtModal, AtModalAction, AtModalContent, AtModalHeader,  } from 'taro-ui'
 // import Wallpaper from './sunset-desert-dunes.jpg'
 import './index.scss'
-import { fetchFavVideos } from '../../services';
+import { editUserNickname, fetchFavVideos, fetchUserInfo } from '../../services';
 
-const videoWidth = Taro.getSystemInfoSync().windowWidth / 3;
+const videoWidth = Taro.getSystemInfoSync().windowWidth / 3 - 4; // 每行显示 3 个视频，去掉边框宽度
 const videoHeight = videoWidth * 16 / 9;
 
 
 export default class Index extends Component {
   state = {
+    userInfo: {
+      nickname: '',
+    },
     nicknameModalVisible: false,
     nicknameInput: '',
     favVideos: [],
   }
 
   componentDidMount () {
-    this.refresh()
+    this.refreshVideos()
+    this.refreshUserInfo();
   }
 
   onTabItemTap() {
-    this.refresh()
+    this.refreshVideos()
+    this.refreshUserInfo();
   }
 
-  refresh = () => {
+  refreshVideos = () => {
     fetchFavVideos().then(favVideos => this.setState({ favVideos }))
+  }
+
+  refreshUserInfo = () => {
+    fetchUserInfo().then(userInfo => {
+      this.setState({ userInfo });
+    })
   }
 
   render () {
@@ -35,7 +46,7 @@ export default class Index extends Component {
         {/* <Image className='wallpaper' src={Wallpaper} /> */}
         <View className='wallpaper' />
         <View className='user-info' onClick={() => this.setState({ nicknameModalVisible: true })}>
-          <Text className='nickname'>Helson</Text>
+          <Text className='nickname'>{this.state.userInfo.nickname || '点击设置昵称'}</Text>
           <AtIcon value='edit' size='16' color='ghostwhite' />
         </View>
         <View className='fav-videos'>
@@ -79,7 +90,17 @@ export default class Index extends Component {
           </AtModalContent>
           <AtModalAction>
             <Button onClick={() => this.setState({ nicknameModalVisible: false })}>取消</Button>
-            <Button onClick={() => this.setState({ nicknameModalVisible: false })}>确定</Button>
+            <Button onClick={() => {
+                editUserNickname(this.state.nicknameInput).then(() => {
+                  this.setState({ nicknameModalVisible: false })
+                  this.refreshUserInfo();
+                }).catch((err) => {
+                  console.error('修改失败: ', err)
+                })
+              }}
+            >
+              确定
+            </Button>
           </AtModalAction>
         </AtModal>
       </View>

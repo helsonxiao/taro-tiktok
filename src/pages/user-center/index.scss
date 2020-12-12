@@ -39,9 +39,10 @@
 
 .fav-videos {
   display: flex;
+  flex-wrap: wrap;
   .fav-video-card {
     background-color: black;
-    border: 1px solid black;
+    border: 2px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
