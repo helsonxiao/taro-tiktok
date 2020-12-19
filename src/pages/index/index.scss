@@ -1,6 +1,12 @@
 // h5
-taro-swiper-core {
-  height: 100vh !important;
+#app>div {
+  height: 100% !important;
+  .taro_page {
+    height: 100% !important;
+  }
+  taro-swiper-core {
+    height: 100% !important;
+  }
 }
 
 .swiper-slide {
