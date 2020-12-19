@@ -8,6 +8,12 @@
       display: none;
     }
   }
+  // h5 样式重置
+  .taro-video-container {
+    position: unset;
+    top: unset;
+    left: unset;
+  }
 }
 
 .wallpaper {

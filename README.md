@@ -6,7 +6,8 @@
 - [x] `Taro.createVideoContext` 无法使用
 - [x] `Video` 组件无法全屏，播放暂停等方法无法调用
 - [ ] `CoverView` 无法使用
-- [ ] `TabBar` 无法使用
+- [x] `TabBar` 无法使用（社区已修复）
+- [ ] `Taro.createVideoContext` 无法处理数字 ID
 
 于是我开始针对教学需求对 Taro 进行修复，所以这个项目同时也能作为 Taro3 的跨端测试项目。
 
@@ -38,6 +39,7 @@ npm run dev:weapp
 ## 注意事项
 - 本项目的 Taro 版本不会更新，因为本项目是以完成跨端应用为目标，讲解如何解决跨端问题，不单单是为了完成这个简单的项目
 - 如果在[微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)中遇到视频无法播放的情况，请尝试下载 Nightly Build 版本
+- `View` 支持使用 style 控制样式，但对于"值"有要求，并非所有值都能直接传入，编译时会被特殊处理
 
 ## PR
 

@@ -70,7 +70,10 @@ export default class Index extends Component {
             <View
               key={v.id}
               className="fav-video-card"
-              style={{ width: videoWidth, height: videoHeight }}
+              style={{
+                width: `${videoWidth}px`,
+                height: `${videoHeight}px`,
+              }}
               onClick={() => {
                 Taro.navigateTo({
                   url: `/pages/video-detail/index?vid=${v.id}`,
