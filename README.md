@@ -8,6 +8,7 @@
 - [ ] `CoverView` 无法使用
 - [x] `TabBar` 无法使用（社区已修复）
 - [ ] `Taro.createVideoContext` 无法处理数字 ID
+- [ ] `TabBar` 页面切换时，没有拉齐小程序的生命周期 API
 
 于是我开始针对教学需求对 Taro 进行修复，所以这个项目同时也能作为 Taro3 的跨端测试项目。
 
