@@ -5,25 +5,26 @@ import Taro from '@tarojs/taro';
 
 /**
  * 网上收集的视频，部分适合国内加载，部分适合国外加载
+ * Taro 暂时处理不了 '123' 这种 id（截止 v3.0.19）
  */
 const VIDEOS = [
   {
-    id: 'bear',
+    id: 'v-bear',
     isFav: false,
     src: 'http://storage.jd.com/cjj-pub-images/bear.mp4',
   },
   {
-    id: '277004',
+    id: 'v-277004',
     isFav: false,
     src: 'https://v-cdn.zjol.com.cn/277004.mp4',
   },
   {
-    id: '276986',
+    id: 'v-276986',
     isFav: false,
     src: 'https://v-cdn.zjol.com.cn/276986.mp4',
   },
   {
-    id: '276991',
+    id: 'v-276991',
     isFav: false,
     src: 'https://v-cdn.zjol.com.cn/276991.mp4',
   },
