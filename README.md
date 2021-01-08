@@ -6,7 +6,7 @@
 - [x] `Taro.createVideoContext` 无法使用
 - [x] `Video` 组件无法全屏，播放暂停等方法无法调用
 - [ ] `CoverView` 无法使用
-- [x] `TabBar` 无法使用（社区已修复）
+- [x] `TabBar` 无法使用
 - [ ] `Taro.createVideoContext` 无法处理数字 ID
 - [ ] `TabBar` 页面切换时，没有拉齐小程序的生命周期 API
 - [ ] `TabBar` 页面的高度没有自动适配
@@ -27,25 +27,21 @@
 # 安装插件
 npm install
 
-# 启动 H5
-npm run dev:h5
-
 # 启动微信小程序
 npm run dev:weapp
 
 # 其它平台请参考 package.json
 ```
 
-> 项目使用的 Taro 版本为 v3.0.9，所以 H5 端的运行依赖我修改后的代码（可以 pull 我下面最新的 [PR](#PR) 然后进行 build）。手动覆盖 `node_modules/@tarojs/taro-h5` & `node_modules/@tarojs/components` 中"可被覆盖的所有代码"后，即可正常调试，支持热更新。
+> 项目使用的 Taro 版本为 v3.0.9，仅测试了微信小程序。H5 端的运行需要根据 `taro-latest` 分支中的说明手动 build 并覆盖 `node_modules/@tarojs/[xxx]`。
 
 ## 注意事项
 - `master` 的 Taro 版本不会更新，因为本项目是以完成跨端应用为目标，讲解如何解决跨端问题，不单单是为了完成这个简单的项目
 - 如果在[微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)中遇到视频无法播放的情况，请尝试下载 Nightly Build 版本
-- `View` 支持使用 style 控制样式，但对于"值"有要求，并非所有值都能直接传入，编译时会被特殊处理
+- `View` 支持使用 style 控制样式，但对于"值"有要求，并非所有值都能生效，编译时会被特殊处理，可能是限制也可能是 bug
 
 ## PR
 
 - [修复 `Taro.createVideoContext`](https://github.com/NervJS/taro/pull/7605)
 
 - [修复 `Video` 在 Safari 浏览器中的全屏异常](https://github.com/NervJS/taro/pull/7891)
-
