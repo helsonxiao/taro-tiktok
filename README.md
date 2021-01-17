@@ -12,5 +12,5 @@
   - 涉及 `taro-components` & `taro-h5`
 
 ### Taro v3.0.19
-- 【H5】[修复 Video]((https://github.com/NervJS/taro/pull/8291))
+- 【H5】[修复 Video](https://github.com/NervJS/taro/pull/8291)
   - 涉及 `taro-components`
