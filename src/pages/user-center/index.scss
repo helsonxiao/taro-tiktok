@@ -16,22 +16,14 @@
   }
 }
 
-.wallpaper {
-  width: 100vw;
+.header {
   height: 300px;
-  background-image: url('./sunset-desert-dunes.jpg');
+  width: 100vw;
+
   background-size: cover;
   background-position: center;
   background-position: top;
   background-repeat: no-repeat;
-}
-
-.user-info {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 300px;
-  width: 100vw;
 
   display: flex;
   align-items: center;
@@ -41,6 +33,10 @@
     font-size: 48px;
     color: ghostwhite;
   }
+}
+
+.user-info {
+  padding: 24rpx 24rpx 24rpx 0; // 增加触摸区域
 }
 
 .fav-videos {
