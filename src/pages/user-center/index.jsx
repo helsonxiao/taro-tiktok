@@ -1,4 +1,4 @@
-import { /* Image, */ Button, Text, Video, View } from '@tarojs/components';
+import { Button, Text, Video, View } from '@tarojs/components';
 import React, { Component } from 'react';
 import Taro from '@tarojs/taro';
 import {
@@ -9,7 +9,7 @@ import {
   AtModalContent,
   AtModalHeader,
 } from 'taro-ui';
-// import Wallpaper from './sunset-desert-dunes.jpg'
+import Wallpaper from './sunset-desert-dunes.jpg';
 import './index.scss';
 import {
   editUserNickname,
@@ -53,16 +53,34 @@ export default class Index extends Component {
   render() {
     return (
       <View className="user-center">
-        {/* <Image className='wallpaper' src={Wallpaper} /> */}
-        <View className="wallpaper" />
         <View
-          className="user-info"
-          onClick={() => this.setState({ nicknameModalVisible: true })}
+          className="header"
+          style={{
+            backgroundImage: `url('${Wallpaper}')`,
+          }}
+          onClick={() => {
+            // 由于微信小程序的安全政策，只能用网络上的图片
+            const url =
+              'https://helsonxiao.github.io/taro-tiktok/h5/static/images/sunset-desert-dunes.jpg';
+            Taro.previewImage({
+              // 当前显示图片的http链接
+              current: url,
+              urls: [url], // 需要预览的图片http链接列表
+            });
+          }}
         >
-          <Text className="nickname">
-            {this.state.userInfo.nickname || '点击设置昵称'}
-          </Text>
-          <AtIcon value="edit" size="16" color="ghostwhite" />
+          <View
+            className="user-info"
+            onClick={(e) => {
+              e.stopPropagation();
+              this.setState({ nicknameModalVisible: true });
+            }}
+          >
+            <Text className="nickname">
+              {this.state.userInfo.nickname || '点击设置昵称'}
+            </Text>
+            <AtIcon value="edit" size="16" color="ghostwhite" />
+          </View>
         </View>
         <View className="fav-videos">
           {this.state.favVideos.length === 0 && <View>TODO: 占位插画</View>}
